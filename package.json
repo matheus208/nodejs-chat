@@ -1,4 +1,13 @@
 {
   "name": "nodejs-chat",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "repository": "https://github.com/matheus208/nodejs-chat",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "latest",
+    "socket.io-client": "latest",
+    "ansi-color": "latest",
+    "coffee-script": "latest",
+    "net": "latest"
+  }
 }

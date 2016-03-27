@@ -1,6 +1,21 @@
-http = require('http');
+PORT = 3000
 
-http.createServer (req,res) ->
-  res.writeHead 200, {'Content-Type': 'text/plain'}
-  res.end 'Hello World!\n'
-.listen 1337, '127.0.0.1'
+io = require('socket.io')(PORT)
+users = []
+
+io.on 'connect', (socket) ->
+  console.log 'Usuário conectado'
+
+  socket.on 'send', (msg) ->
+    if msg.type == 'user'
+      if users indexOf msg.username < 0
+        users.push msg.username
+    if msg.type == 'exit'
+      users.splice(users.indexOf(msg.username) ,1)
+
+    io.emit 'message', msg
+
+  socket.on 'disconnect', () ->
+    console.log 'Usuário desconectado'
+
+console.log "Escutando na porta #{PORT}..."
